@@ -1,0 +1,80 @@
+.mapBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.map {
+    font-family: sans-serif;
+    text-align: center;
+    margin-left: auto;
+    margin-right: 70px;
+    width: 600px;
+}
+
+.map p {
+    font-size: 20px;
+}
+
+svg {
+    stroke: #fff;
+}
+
+svg path {
+    fill: darkkhaki;
+    cursor: pointer;
+    outline: none;
+}
+
+svg path:hover {
+    fill: rgba(168, 43, 43, 0.83);
+}
+
+svg path:focus {
+    fill: rgba(168, 43, 43, 0.83);
+}
+
+svg path[aria-checked="true"] {
+    fill: rgba(56, 43, 168, 1);
+}
+
+.tableBox {
+    font-size: small;
+    margin-top: 60px;
+    margin-right: 100px;
+    width: auto;
+    height: auto;
+
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+tr td {
+    border: 1px solid black;
+}
+
+
+th {
+    width: 120px;
+    background-color: darkkhaki;
+    border: 1px solid black;
+}
+
+caption {
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+button {
+    float: right;
+    background-color: white;
+    border: 1px solid darkkhaki;
+}
+
+button:hover {
+    background-color: rgba(168, 43, 43, 0.83);
+    color: white;
+}
