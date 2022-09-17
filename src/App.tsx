@@ -896,7 +896,7 @@ const stateWithoutGDP = {
         }
     ]
 }
-const stateGDP = [
+const dataGDP = [
     {
         "rank": 1,
         "country": "United States",
@@ -2595,6 +2595,7 @@ const stateGDP = [
     }
 ]
 
+
 type selectedType = {
     id: string
     gdp: string
@@ -2604,26 +2605,26 @@ function App() {
     const [hovered, setHovered] = useState<string>('None');
     const [selected, setSelected] = useState<Array<selectedType>>([]);
 
-    const addGdpInState = (initState: any, stateGDB: any) => {
-        let stateCopy = {...initState}
-        let stateWithGDBCopy = [...stateGDB]
+    const addGDPInState = (stateWithoutGDP: any, dataGdp: any) => {
+        let stateCopy = {...stateWithoutGDP}
+        let dataGDPCopy = [...dataGdp]
+        
 
-        for (let i = 0; i < initState.layers.length; i++) {
-            let findGDB = stateWithGDBCopy.find(el =>
+        for (let i = 0; i < stateWithoutGDP.layers.length; i++) {
+            let findGDP = dataGDPCopy.find(el =>
                 el.country.toUpperCase() === stateCopy.layers[i].name.toUpperCase())
-            if (findGDB) {
+            if (findGDP) {
                 stateCopy.layers[i] = {
-                    ...stateCopy.layers[i], gdp: stateWithGDBCopy[i].gdpPerCapita
+                    ...stateCopy.layers[i], gdp: dataGDPCopy[i].gdpPerCapita
                 }
             }
         }
         return stateCopy
     }
 
-    let summaryState = addGdpInState(stateWithoutGDP, stateGDP)
+    let combinedState = addGDPInState(stateWithoutGDP, dataGDP)
 
-    const averageGdp = selected.reduce(
-        (acc, country) => acc + Number(country.gdp) / selected.length, 0);
+    const averageGDP = selected.reduce((acc, country) => acc + Number(country.gdp) / selected.length, 0);
 
 
     const layerProps = {
@@ -2648,14 +2649,14 @@ function App() {
             <div className={s.map}>
                 <p>{hovered}</p>
                 <hr/>
-                <VectorMap {...summaryState} layerProps={layerProps}/>
+                <VectorMap {...combinedState} layerProps={layerProps}/>
             </div>
             <div className={s.tableBox}>
                 <table>
                     <caption>Selected country</caption>
                     <tr>
                         <th>country</th>
-                        <th>gdp per capital</th>
+                        <th>GDP per capital</th>
                     </tr>
                     {selected.map(el =>
                         <tr>
@@ -2665,7 +2666,7 @@ function App() {
                     )}
                     <tr style={{backgroundColor: "darkkhaki"}}>
                         <th>average GDP :</th>
-                        <th>{averageGdp.toFixed(3) + " $"}</th>
+                        <th>{averageGDP.toFixed(3) + " $"}</th>
                     </tr>
                 </table>
                 <div className={s.button}>
